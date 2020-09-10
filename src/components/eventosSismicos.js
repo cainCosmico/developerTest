@@ -1,36 +1,48 @@
 import React, { useEffect } from 'react'
 
-import { makeStyles } from '@material-ui/core/styles';
-import Table from '@material-ui/core/Table';
-import TableBody from '@material-ui/core/TableBody';
-import TableCell from '@material-ui/core/TableCell';
-import TableContainer from '@material-ui/core/TableContainer';
-import TableHead from '@material-ui/core/TableHead';
-import TableRow from '@material-ui/core/TableRow';
-import Paper from '@material-ui/core/Paper';
+// import { makeStyles } from '@material-ui/core/styles';
+// import Table from '@material-ui/core/Table';
+// import TableBody from '@material-ui/core/TableBody';
+// import TableCell from '@material-ui/core/TableCell';
+// import TableContainer from '@material-ui/core/TableContainer';
+// import TableHead from '@material-ui/core/TableHead';
+// import TableRow from '@material-ui/core/TableRow';
+// import Paper from '@material-ui/core/Paper';
 
 import useFetchSGC from '../hooks/useFetchSGC';
 
 
-const useStyles = makeStyles({
-   table: {
-      minWidth: 650,
-   },
-});
+// const useStyles = makeStyles({
+//    table: {
+//       minWidth: 650,
+//    },
+// });
 
 const EventosSismicos = () => {
 
-   const classes = useStyles();
+   // const classes = useStyles();
    const { loading, data } = useFetchSGC();
 
    useEffect(() => {
       console.log(data);
    }, [data]);
 
+   // npm install @material-ui/core
+
    return (
       <>
          {loading && <h1>Cargando datos...</h1>}
-         <TableContainer component={Paper}>
+         <ol>
+         {data.map((row) => (
+            <li key={row.id}>{row.place}  {row.mag} {row.utc} </li>
+            // <TableRow key={row.id}>
+            //    <TableCell component="th" scope="row">{row.place}</TableCell>
+            //    <TableCell align="right">{row.mag}</TableCell>
+            //    <TableCell align="right">{row.utc}</TableCell>
+            // </TableRow>
+         ))}
+         </ol>
+         {/* <TableContainer component={Paper}>
             <Table className={classes.table} aria-label="simple table">
                <TableHead>
                   <TableRow>
@@ -49,7 +61,7 @@ const EventosSismicos = () => {
                   ))}
                </TableBody>
             </Table>
-         </TableContainer>
+         </TableContainer> */}
       </>
    )
 }
